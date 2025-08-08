@@ -4,10 +4,18 @@ provider:
   name: aws
   runtime: nodejs22.x
   region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    NODE_ENV: ${self:provider.stage}
+    DATABASE_NAME: database.db
+    JWT_SECRET: ${env:JWT_SECRET, 'default-secret'}
+    JWT_EXPIRES_IN: ${env:JWT_EXPIRES_IN, '1d'}
+  memorySize: 512
+  timeout: 30
 
 functions:
   api:
-    handler: src/server.handler
+    handler: dist/src/server.handler
     events:
       - http:
           path: /
@@ -21,14 +29,15 @@ functions:
       - http:
           path: /api/docs/json
           method: get
+    environment:
+      NODE_ENV: ${self:provider.stage}
 
 package:
   patterns:
     - '!./**'
-    - 'src/**'
+    - 'dist/**'
     - 'node_modules/**'
     - 'package.json'
-    - 'tsconfig.json'
   excludeDevDependencies: true
 
 plugins:

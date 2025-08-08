@@ -167,6 +167,41 @@ O projeto mantém **80%+ de cobertura** de código conforme especificado.
 
 ### AWS Lambda
 
+O projeto está configurado para deploy automático no AWS Lambda usando Serverless Framework.
+
+#### Deploy Automático (GitHub Actions)
+- O deploy acontece automaticamente quando há push para a branch `main`
+- Configurado via `.github/workflows/deploy.yml`
+
+#### Deploy Manual
+```bash
+# Instalar dependências
+npm install
+
+# Build da aplicação
+npm run build
+
+# Deploy para AWS Lambda
+npx serverless deploy --stage dev
+```
+
+#### Configuração
+- **Runtime**: Node.js 22.x
+- **Memória**: 512MB
+- **Timeout**: 30 segundos
+- **Região**: us-east-1
+
+#### Variáveis de Ambiente Necessárias
+```bash
+JWT_SECRET=seu_jwt_secret_aqui
+JWT_EXPIRES_IN=1d
+AWS_ACCESS_KEY_ID=sua_aws_access_key
+AWS_SECRET_ACCESS_KEY=sua_aws_secret_key
+AWS_REGION=us-east-1
+```
+
+Para mais detalhes sobre o deploy, consulte o arquivo `DEPLOY.md`.
+
 ## 📝 Validações Implementadas
 
 ### Campos Obrigatórios

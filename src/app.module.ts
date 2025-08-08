@@ -14,7 +14,9 @@ import { User } from './entities/user.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: process.env.DATABASE_NAME || 'database.db',
+      database: process.env.NODE_ENV === 'production' 
+        ? '/tmp/database.db' 
+        : (process.env.DATABASE_NAME || 'database.db'),
       entities: [Person, User],
       synchronize: true,
       logging: process.env.NODE_ENV === 'development',
