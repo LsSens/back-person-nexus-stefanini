@@ -10,7 +10,7 @@ Esta é uma API REST desenvolvida em Node.js com NestJS e TypeScript para gerenc
 - **Documentação**: Swagger/OpenAPI
 - **Testes**: Jest (unitários e e2e)
 - **Validações**: class-validator, class-transformer
-- **Deploy**: Vercel
+- **Deploy**: AWS Lambda
 
 ## 📋 Funcionalidades
 
@@ -165,11 +165,7 @@ O projeto mantém **80%+ de cobertura** de código conforme especificado.
 
 ## ☁️ Deploy em Nuvem
 
-### Vercel
-```bash
-# Fazer deploy via Vercel CLI
-vercel --prod
-```
+### AWS Lambda
 
 ## 📝 Validações Implementadas
 

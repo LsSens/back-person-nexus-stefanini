@@ -1,0 +1,40 @@
+service: pessoa-cadastro-api
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: us-east-1
+
+functions:
+  api:
+    handler: src/server.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+      - http:
+          path: /api/docs
+          method: get
+      - http:
+          path: /api/docs/json
+          method: get
+
+package:
+  patterns:
+    - '!./**'
+    - 'src/**'
+    - 'node_modules/**'
+    - 'package.json'
+    - 'tsconfig.json'
+  excludeDevDependencies: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+    noPrependStageInUrl: true
