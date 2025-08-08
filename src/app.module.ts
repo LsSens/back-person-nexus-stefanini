@@ -33,7 +33,18 @@ export class AppModule implements OnModuleInit {
   constructor(private readonly s3DatabaseService: S3DatabaseService) {}
 
   async onModuleInit() {
-    // Garantir que o banco existe antes de inicializar o TypeORM
-    await this.s3DatabaseService.ensureDatabaseExists();
+    try {
+      console.log('Iniciando configuração do banco de dados...');
+      console.log('NODE_ENV:', process.env.NODE_ENV);
+      console.log('S3_BUCKET_NAME:', process.env.S3_BUCKET_NAME);
+      console.log('DATABASE_NAME:', process.env.DATABASE_NAME);
+      
+      await this.s3DatabaseService.ensureDatabaseExists();
+      
+      console.log('Banco de dados configurado com sucesso');
+    } catch (error) {
+      console.error('Erro na configuração do banco de dados:', error);
+      throw error;
+    }
   }
 }
