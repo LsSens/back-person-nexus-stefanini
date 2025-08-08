@@ -14,7 +14,7 @@ export class S3DatabaseService {
   constructor() {
     this.s3 = new AWS.S3();
     this.bucketName = process.env.S3_BUCKET_NAME || 'pessoa-cadastro-db';
-    this.databaseKey = process.env.DATABASE_KEY || 'h2db.db';
+    this.databaseKey = process.env.DATABASE_NAME || 'h2db.db';
     this.localDatabasePath = '/tmp/h2db.db';
   }
 

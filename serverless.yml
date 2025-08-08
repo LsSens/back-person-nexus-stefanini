@@ -7,9 +7,8 @@ provider:
   stage: ${opt:stage, 'dev'}
   environment:
     NODE_ENV: ${self:provider.stage}
-    DATABASE_NAME: h2db.db
     S3_BUCKET_NAME: ${env:S3_BUCKET_NAME, 'pessoa-cadastro-db'}
-    DATABASE_KEY: ${env:DATABASE_KEY, 'h2db.db'}
+    DATABASE_NAME: ${env:DATABASE_NAME, 'h2db.db'}
     JWT_SECRET: ${env:JWT_SECRET, 'default-secret'}
     JWT_EXPIRES_IN: ${env:JWT_EXPIRES_IN, '1d'}
   memorySize: 512
