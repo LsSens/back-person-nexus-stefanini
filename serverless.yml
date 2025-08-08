@@ -7,11 +7,23 @@ provider:
   stage: ${opt:stage, 'dev'}
   environment:
     NODE_ENV: ${self:provider.stage}
-    DATABASE_NAME: database.db
+    DATABASE_NAME: h2db.db
+    S3_BUCKET_NAME: ${env:S3_BUCKET_NAME, 'pessoa-cadastro-db'}
+    DATABASE_KEY: ${env:DATABASE_KEY, 'h2db.db'}
     JWT_SECRET: ${env:JWT_SECRET, 'default-secret'}
     JWT_EXPIRES_IN: ${env:JWT_EXPIRES_IN, '1d'}
   memorySize: 512
   timeout: 30
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource: 
+            - "arn:aws:s3:::${env:S3_BUCKET_NAME, 'pessoa-cadastro-db'}/*"
 
 functions:
   api:

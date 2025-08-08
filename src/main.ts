@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { DatabaseSyncInterceptor } from './common/interceptors/database-sync.interceptor';
+import { S3DatabaseService } from './config/s3-database.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +13,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
+
+  const s3DatabaseService = app.get(S3DatabaseService);
+  app.useGlobalInterceptors(new DatabaseSyncInterceptor(s3DatabaseService));
 
   app.enableCors({
     origin: true,
