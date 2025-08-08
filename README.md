@@ -10,7 +10,7 @@ Esta é uma API REST desenvolvida em Node.js com NestJS e TypeScript para gerenc
 - **Documentação**: Swagger/OpenAPI
 - **Testes**: Jest (unitários e e2e)
 - **Validações**: class-validator, class-transformer
-- **Deploy**: Docker, Railway, Vercel, Render
+- **Deploy**: Vercel
 
 ## 📋 Funcionalidades
 
@@ -162,20 +162,6 @@ npm run test:watch
 
 ### Cobertura
 O projeto mantém **80%+ de cobertura** de código conforme especificado.
-
-## 🐳 Docker
-
-### Build e Execução
-```bash
-# Build da imagem
-docker build -t pessoa-cadastro-api .
-
-# Executar container
-docker run -p 3000:3000 pessoa-cadastro-api
-
-# Ou usar docker-compose
-docker-compose up
-```
 
 ## ☁️ Deploy em Nuvem
 
