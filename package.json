@@ -2,7 +2,7 @@
   "name": "pessoa-cadastro-api",
   "version": "1.0.0",
   "description": "API para cadastro de pessoas com NestJS",
-  "author": "",
+  "author": "Lucas Sens",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
